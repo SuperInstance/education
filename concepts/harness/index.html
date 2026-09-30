@@ -1,0 +1,29 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Self-Improving Harness — SuperInstance</title>
+<meta name="description" content="Build, fail, extract the pattern, vectorize it, retrieve it on the next failure."/>
+<link rel="stylesheet" href="../../assets/site.css"/>
+</head><body>
+<nav><div class="wrap"><a class="brand" href="../../index.html">SUPERINSTANCE</a>
+<a class="nl" href="../index.html">Concepts</a><span class="sp"></span>
+<a class="cta" href="https://github.com/SuperInstance">GitHub →</a></div></nav>
+<header class="hero"><div class="wrap"><div class="kick">Concept 4 of 6</div>
+<h1>Failures that <em>become retrievable</em></h1>
+<p class="lede">Most harnesses record that something broke. This one records what kind of
+thing broke, so the next occurrence is cheaper.</p></div></header>
+<section><div class="wrap">
+<h2>The loop</h2>
+<pre><code>build ──&gt; test ──&gt; fail ──&gt; extract ──&gt; vectorize ──&gt; store
+  ▲                                          │
+  └──────────── retrieve on next failure ─────┘</code></pre>
+<div class="card"><h3>What "extract" means here</h3>
+<p>Not the stack trace. The <em>shape</em> of the failure — which assertion, in which file
+class, matching which previous incident. A pattern that cannot be retrieved is a log line;
+one that can be retrieved is a fix waiting for a match.</p></div>
+<pre><code><span class="cm">// the only part that is really load-bearing</span>
+<span class="kw">let</span> past = index.query(embedding(failure))?;
+<span class="kw">if</span> past.len() &gt; 0 { context.push(past[0].fix) }</code></pre>
+</div></section>
+<footer><div class="wrap"><div class="honest">Built to SITE-MAP.md §6. The vector index is in
+the repos; this page is the loop without the plumbing, and says so.</div></div></footer>
+</body></html>
