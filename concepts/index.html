@@ -1,0 +1,59 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Concepts — SuperInstance</title>
+<meta name="description" content="Six concepts the substrate is built from, each with a page that teaches it rather than selling it."/>
+<link rel="stylesheet" href="../assets/site.css"/>
+</head><body>
+<nav><div class="wrap">
+  <a class="brand" href="../index.html">SUPERINSTANCE</a>
+  <a class="nl" href="../index.html">Home</a>
+  <a class="nl on" href="./">Concepts</a>
+  <a class="nl" href="../crates/">Crates</a>
+  <a class="nl" href="../build/">Build</a>
+  <a class="nl" href="../play/">Play</a>
+  <span class="sp"></span>
+  <a class="cta" href="https://github.com/SuperInstance">GitHub →</a>
+</div></nav>
+<header class="hero"><div class="wrap">
+  <div class="kick">Six concepts</div>
+  <h1>What the substrate is <em>actually made of</em></h1>
+  <p class="lede">Not a product page. Each one below has a page that teaches it, and where
+  the maths is small enough to put in the browser, it <em>runs in the browser</em>.</p>
+</div></header>
+<section><div class="wrap">
+  <h2>Foundational first</h2>
+  <table>
+    <tr><th>#</th><th>Concept</th><th>One sentence</th><th></th></tr>
+    <tr><td>1</td><td><a href="ternary-conservation/">Ternary conservation</a></td>
+      <td>Every interaction conserves γ + η = C, and a sum outside the range is a refusal.</td><td>live calculator</td></tr>
+    <tr><td>2</td><td><a href="bottle-protocol/">Bottle protocol</a></td>
+      <td>A JSON envelope a router can read, wrapping a payload only the target decodes.</td><td></td></tr>
+    <tr><td>3</td><td><a href="agent-lifecycle/">Agent lifecycle</a></td>
+      <td>Two methods, four states, and every transition is itself a bottle.</td><td></td></tr>
+  </table>
+  <h2>Derived</h2>
+  <table>
+    <tr><th>#</th><th>Concept</th><th>One sentence</th><th></th></tr>
+    <tr><td>4</td><td><a href="harness/">Self-improving harness</a></td>
+      <td>Build → fail → extract pattern → vectorize → retrieve on the next failure.</td><td></td></tr>
+    <tr><td>5</td><td><a href="conservation-law/">Conservation law</a></td>
+      <td>What γ + η = C is isomorphic to in Z₃, and what the analogy buys and costs.</td><td></td></tr>
+    <tr><td>6</td><td><a href="wavelet-decomposition/">Wavelet decomposition</a></td>
+      <td>Signals read by scale, in the order the scale changes.</td><td></td></tr>
+  </table>
+</div></section>
+<section class="alt"><div class="wrap">
+  <h2>Dependency order</h2>
+  <pre><code>ternary conservation
+   └─&gt; bottle protocol        (a bottle is where γ meets η)
+        └─&gt; agent lifecycle    (states move; each move is a bottle)
+             ├─&gt; harness         (failures become retrievable patterns)
+             └─&gt; conservation law (the Z₃ isomorphism, taken seriously)</code></pre>
+  <p>Read in that order and the later pages make sense on their own terms. Read out of order
+  and every one of them looks like a riddle.</p>
+</div></section>
+<footer><div class="wrap"><div class="honest">
+  Built to <a href="../SITE-MAP.md">SITE-MAP.md</a> §2, which specifies this page and its
+  six children. No trackers, no accounts, no network calls.
+</div></div></footer>
+</body></html>
