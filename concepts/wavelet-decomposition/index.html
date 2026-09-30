@@ -1,0 +1,24 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Wavelet Decomposition — SuperInstance</title>
+<meta name="description" content="Signals read by scale, in the order the scale changes."/>
+<link rel="stylesheet" href="../../assets/site.css"/>
+</head><body>
+<nav><div class="wrap"><a class="brand" href="../../index.html">SUPERINSTANCE</a>
+<a class="nl" href="../index.html">Concepts</a><span class="sp"></span>
+<a class="cta" href="https://github.com/SuperInstance">GitHub →</a></div></nav>
+<header class="hero"><div class="wrap"><div class="kick">Concept 6 of 6</div>
+<h1>Read a signal <em>by scale</em></h1>
+<p class="lede">A ternary stream is three levels wide. Decompose it into bands and each band
+carries a different kind of information.</p></div></header>
+<section><div class="wrap">
+<h2>Bands</h2>
+<table><tr><th>Band</th><th>Holds</th><th>Changes slowly when</th></tr>
+<tr><td>coarse</td><td>position, trend</td><td>the shape of the whole</td></tr>
+<tr><td>mid</td><td>the transition region</td><td>a level flips</td></tr>
+<tr><td>fine</td><td>single-cell excursions</td><td>noise</td></tr></table>
+<pre><code><span class="cm">// Haar-style on a ternary stream: average pairs, then the difference</span>
+<span class="kw">let</span> (coarse, fine) = (avg(step 2), diff(step 2));</code></pre>
+</div></section>
+<footer><div class="wrap"><div class="honest">Built to SITE-MAP.md §8.</div></div></footer>
+</body></html>
