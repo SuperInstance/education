@@ -1,0 +1,280 @@
+{
+ "total": 281,
+ "langs": {
+  "Python": 130,
+  "JavaScript": 53,
+  "HTML": 28,
+  "other": 20,
+  "TypeScript": 17,
+  "Rust": 16,
+  "Shell": 6,
+  "C": 4,
+  "Julia": 2,
+  "BQN": 1,
+  "Futhark": 1,
+  "Erlang": 1,
+  "C#": 1,
+  "Mermaid": 1
+ },
+ "rows": [
+  [
+   "Python",
+   "plato-portal",
+   "Python SDK for persistent multi-agent systems \u2014 agents with markdown memory, in-memory fleet, thread-safe LRU cache, and optional DeepInfra LLM integration",
+   2,
+   "Python"
+  ],
+  [
+   "Python",
+   "webgpu-profiler",
+   "GPU profiler for WebGPU applications - Real-time GPU monitoring, benchmarking, and performance analysis in the browser",
+   2,
+   "Python"
+  ],
+  [
+   "Python",
+   "git-agent",
+   "\ud83e\udd80 Repo-native agent that lives in git \u2014 the shell IS the agent.",
+   2,
+   "Python"
+  ],
+  [
+   "Python",
+   "jev-quilt",
+   "JEV for quilt as understood output: cellular-first decision substrate \u2014 typed cells, hook-and-drop deltas, bookkeeper WAL, last-mile projection decoupled",
+   1,
+   "Python"
+  ],
+  [
+   "JavaScript",
+   "Scrapcraft",
+   "Browser-based 3D voxel game set in an industrial scrapyard \u2014 middle schoolers build robots, program them with AI, and learn embedded engineering via Arduino C++ and MicroPython",
+   3,
+   "JavaScript"
+  ],
+  [
+   "JavaScript",
+   "fleet-research",
+   "Deep research and analysis of the SuperInstance/Lucineer fleet ecosystem and industry landscape",
+   1,
+   "JavaScript"
+  ],
+  [
+   "JavaScript",
+   "typesafe-quilts",
+   "System One as judge: calibration battery + routing judgments + the judge protocol for quilt lanes. Live jev-1.13.0.",
+   0,
+   "JavaScript"
+  ],
+  [
+   "JavaScript",
+   "quilt-lab",
+   "The fleet's experiment protocol as a tool: register \u2192 run \u2192 receipt \u2192 seal. Tools that make tools.",
+   0,
+   "JavaScript"
+  ],
+  [
+   "HTML",
+   "SuperInstance",
+   "",
+   7,
+   "HTML"
+  ],
+  [
+   "HTML",
+   "AI-Writings",
+   "Creative writing, essays, and philosophical explorations from the Exocortex project",
+   3,
+   "HTML"
+  ],
+  [
+   "HTML",
+   "crab-traps",
+   "\ud83e\ude9d Progressive lure prompts for the Cocapn Fleet PurplePincher program. Every agent that enters makes the fleet smarter.",
+   2,
+   "HTML"
+  ],
+  [
+   "HTML",
+   "mavis-pincher-pages",
+   "SuperInstance fleet tool POC (Mavis, 2026-09-28)",
+   0,
+   "HTML"
+  ],
+  [
+   "other",
+   "site-repair",
+   "Diagnosis of the fleet website outage: one real link bug, one dangerous false fix, and eleven specified-but-missing pages",
+   0,
+   null
+  ],
+  [
+   "other",
+   "repo-publication-log",
+   "The log of going through the 201 private SuperInstance repos: what each one is, what was wrong, what it became, and what should be built next",
+   0,
+   null
+  ],
+  [
+   "other",
+   "quilt-ml-architecture",
+   "What Quilt should build for ML: the model as a cell graph, witness at every activation, and the canary moved down to the tensor",
+   0,
+   null
+  ],
+  [
+   "other",
+   "witness-validation",
+   "Design for making the canon witness log predictive, rewindable, and integrity-checked \u2014 e-processes for statistical validity, Merkle+checkpoints for tamper evidence",
+   0,
+   null
+  ],
+  [
+   "TypeScript",
+   "SuperInstance-papers",
+   "Automatically Deconstruct logic into Spread Sheet Tiles and Cells, Instances Interconnected w/ Origin-Centric-Math. Breakdown LLMs to Swarms of Artifacts, data, feeds, programs (bots), agents (bots with models), and Seed-Model-Programming (SMPbot), ML tools tiled to any abstraction. Chatbot describes cells for fine tuning + explains how cell works",
+   2,
+   "TypeScript"
+  ],
+  [
+   "TypeScript",
+   "polln",
+   "SuperInstance Visualized in Spreadsheets for Tile Intelligence in real-time workflows, simulations or monitoring. Deconstruct Agents Instances into App-Specific Functions for granulator reasoning control and reverse engineering logic graphically. SMPbots Seed+Model+Prompt can replace cold logic + scale on GPUs. *Inductive ML Programs in tile logic*",
+   1,
+   "TypeScript"
+  ],
+  [
+   "TypeScript",
+   "PersonalLog",
+   "Personal logging and tracking application for the Cocapn fleet.",
+   1,
+   "TypeScript"
+  ],
+  [
+   "TypeScript",
+   "SmartCRDT",
+   "Utilizing CRDT technology for self-improving AI",
+   1,
+   "TypeScript"
+  ],
+  [
+   "Rust",
+   "quilt-mhs",
+   "quilt \u00d7 Anthropic's Model Hardware Standard: quilt cells drive MHS devices; quilt runtimes exposed AS MHS devices (intra/inter-quilt federation). Runs today on MockMHS + conformance suite \u2014 built for the day the real spec lands.",
+   2,
+   "Rust"
+  ],
+  [
+   "Rust",
+   "pincher",
+   "Vector Database as runtime, LLM as compiler",
+   1,
+   "Rust"
+  ],
+  [
+   "Rust",
+   "plato-runtime-kernel",
+   "Runtime kernel for PLATO \u2014 the AI theorem prover. Conservation-verified computation on bare metal.",
+   1,
+   "Rust"
+  ],
+  [
+   "Rust",
+   "audit-trail",
+   "Append-only audit trail with a hash-chained head, in the shape the SuperInstance witness log needs",
+   0,
+   "Rust"
+  ],
+  [
+   "Shell",
+   "fleet-hooks",
+   "Fleet git hooks: fail-closed credential key-scan pre-commit + setup",
+   0,
+   "Shell"
+  ],
+  [
+   "Shell",
+   "quilt-codespace-lab",
+   "The codespace as an ephemeral honest worker: postCreate experiments that self-push receipts. Publish -> registry -> consume -> receipt loop.",
+   0,
+   "Shell"
+  ],
+  [
+   "Shell",
+   "ternary-wiki",
+   "",
+   0,
+   "Shell"
+  ],
+  [
+   "Shell",
+   "loom-caching-rollout",
+   "Production-grade shell script for phased 25% canary rollout of Loom caching with automatic rollback guardrails and Cloudflare metric sync",
+   0,
+   "Shell"
+  ],
+  [
+   "C",
+   "ability-transfer",
+   "\ud83c\udfd7\ufe0f Simulation lab \u2014 designing modular ability transfer between AI agents through git repos",
+   1,
+   "C"
+  ],
+  [
+   "C",
+   "quilt-c",
+   "Polyformalism: Quilt in C (bare metal, the mathematical core)",
+   0,
+   "C"
+  ],
+  [
+   "C",
+   "Syzygy",
+   "**Fused single-pass execution for sensor streams. System-agnostic. Register-resident. Re-executable by a stranger.**",
+   0,
+   "C"
+  ],
+  [
+   "C",
+   "quilt-esp32",
+   "A Quilt reactive runtime for ESP32-class microcontrollers. no_std Rust, ~3KB flash, sensors as cells, the spreadsheet becomes the firmware.",
+   0,
+   "C"
+  ],
+  [
+   "Julia",
+   "QuiltEgg.jl",
+   "Julia port from the SuperInstance fleet \u2014 polyformalism canary / the Quilt cell",
+   0,
+   "Julia"
+  ],
+  [
+   "Julia",
+   "QuiltCanary.jl",
+   "Julia port from the SuperInstance fleet \u2014 polyformalism canary / the Quilt cell",
+   0,
+   "Julia"
+  ],
+  [
+   "BQN",
+   "canary-3lang",
+   "The FNV-1a 64 polyformalism canary 0x24a555471370b18d in Futhark and BQN, with the Futhark/BQN/Uiua substrate analysis",
+   0,
+   "BQN"
+  ],
+  [
+   "Futhark",
+   "futhark-lab",
+   "Futhark experiments for the Quilt cellular substrate \u2014 TICK-as-one-kernel, witness-chain prefix scan, and the compiler constraints that decide what is even expressible",
+   0,
+   "Futhark"
+  ],
+  [
+   "Erlang",
+   "quilt-i2i",
+   "Low-level Quilt cells in distant language families (Forth/Prolog/Erlang) \u2014 each language carves a different shape from the same doctrine.",
+   0,
+   "Erlang"
+  ]
+ ]
+}
