@@ -1,0 +1,46 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Build — SuperInstance</title>
+<meta name="description" content="Build your first agent: two methods, a bottle, and a conservation check."/>
+<link rel="stylesheet" href="../assets/site.css"/>
+</head><body>
+<nav><div class="wrap"><a class="brand" href="../index.html">SUPERINSTANCE</a>
+<a class="nl" href="../index.html">Home</a><a class="nl" href="../concepts/">Concepts</a>
+<a class="nl" href="../crates/">Crates</a><a class="nl on" href="./">Build</a>
+<a class="nl" href="../play/">Play</a><span class="sp"></span>
+<a class="cta" href="https://github.com/SuperInstance">GitHub →</a></div></nav>
+<header class="hero"><div class="wrap"><div class="kick">Build</div>
+<h1>Your first agent, <em>in four steps</em></h1>
+<p class="lede">Enough to be real. Not enough to be a tutorial that runs once and never
+again.</p></div></header>
+<section><div class="wrap">
+<h2>1 · Implement two methods</h2>
+<pre><code><span class="kw">impl</span> <span class="st">Agent</span> <span class="kw">for</span> Echo {
+    <span class="kw">fn</span> <span class="st">receive</span>(&amp;mut self, b: Bottle) -&gt; Bottle {{ b }}
+    <span class="kw">fn</span> <span class="st">inspect</span>(&amp;self) -&gt; AgentState {{ AgentState::Active }}
+}}</code></pre>
+<h2>2 · Conserve on every interaction</h2>
+<pre><code><span class="kw">let</span> c = self.gamma + incoming.gamma;   <span class="cm">// Z₃ residue</span>
+<span class="kw">if</span> c &lt; -1 || c &gt; 1 {{ <span class="kw">return</span> Err(Refusal::Conservation) }}
+self.gamma = c;</code></pre>
+<h2>3 · Wrap the payload so a router never decodes it</h2>
+<pre><code>Bottle {{ routing: json!(dest, kind), payload: msgpack(encode(inner)) }}</code></pre>
+<h2>4 · Check the witness, not the prose</h2>
+<pre><code>fnv1a_64("café Δ 日本語") == 0x024a555471370b18d   <span class="cm">// if this fails, stop</span></code></pre>
+</div></section>
+<section class="alt"><div class="wrap">
+<h2>Porting the canary</h2>
+<table><tr><th>substrate</th><th>what to do</th><th>the constant</th></tr>
+<tr><td>Python</td><td>hand-roll; <code>hashlib</code> has no FNV-1a 64</td><td><code>0x024a555471370b18d</code></td></tr>
+<tr><td>Rust</td><td><code>u64</code> wraps natively — this is the easy one</td><td>same</td></tr>
+<tr><td>C</td><td><code>unsigned long long</code>, no <code>long long</code></td><td>same</td></tr>
+<tr><td>TypeScript</td><td><code>BigInt</code> — JS numbers cannot hold 2⁵³</td><td>same</td></tr>
+<tr><td>Julia</td><td><code>UInt64</code> wraps; the type must be <code>UInt64</code></td><td>same</td></tr>
+</table>
+<p>Two of those five have a trap that returns a wrong number <em>without an error</em>:
+a signed multiply, and a JS number. Neither throws. Both pass a casual smoke test.</p>
+</div></section>
+<footer><div class="wrap"><div class="honest">Built to SITE-MAP.md §11. The canary
+constant and its accented fixture are load-bearing — <code>cafe</code> without the accent
+is a different test.</div></div></footer>
+</body></html>
