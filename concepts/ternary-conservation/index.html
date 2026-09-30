@@ -1,0 +1,123 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ternary Conservation — SuperInstance</title>
+<meta name="description" content="γ + η = C: the equation the substrate is built on, with a live conservation calculator."/>
+<link rel="stylesheet" href="../../assets/site.css"/>
+</head><body>
+<nav><div class="wrap">
+  <a class="brand" href="../../index.html">SUPERINSTANCE</a>
+  <a class="nl" href="../index.html">Concepts</a>
+  <a class="nl on" href="./">Conservation</a>
+  <a class="nl" href="../bottle-protocol/">Bottles</a>
+  <a class="nl" href="../agent-lifecycle/">Lifecycle</a>
+  <span class="sp"></span>
+  <a class="cta" href="https://github.com/SuperInstance">GitHub →</a>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div class="kick">Concept 1 of 6</div>
+  <h1>Ternary conservation: <em>γ + η = C</em></h1>
+  <p class="lede">Two things meet and something is conserved. That is the whole physics of
+  the substrate, and this page lets you break it on purpose.</p>
+</div></header>
+
+<section><div class="wrap">
+  <h2>The equation</h2>
+  <p>Every cell in the fleet moves between three states, and every interaction between two
+  cells conserves a quantity. Written as γ (a cell's own state) against η (the state
+  arriving in a bottle), the remainder is C.</p>
+  <pre><code><span class="cm">// the entire conservation check</span>
+<span class="kw">fn</span> <span class="st">conserve</span>(gamma: Ternary, eta: Ternary) -&gt; C {
+    gamma + eta                     <span class="cm">// {-1,0,+1} arithmetic, C is the residue</span>
+}</code></pre>
+  <p>Not a metaphor for a check that happens elsewhere — it <em>is</em> the check, and it runs
+  in the kernel, in every language the kernel ports to.</p>
+</div></section>
+
+<section class="alt"><div class="wrap">
+  <h2>Live conservation calculator</h2>
+  <p>Move either slider. <b>C</b> is the residue. If a pair sums outside the representable
+  range, the conservation law <em class="viol">violates</em> and the cell flashes red — which
+  is exactly what the kernel does at runtime.</p>
+  <div class="eg">
+    <div class="row">
+      <div><label for="g">γ — own state</label><input type="range" id="g" min="-1" max="1" step="1" value="0"></div>
+      <div><label for="e">η — incoming</label><input type="range" id="e" min="-1" max="1" step="1" value="0"></div>
+      <div><button id="violate">inject a violation</button>
+           <button class="ghost" id="reset">reset</button></div>
+    </div>
+    <div class="tern">
+      <div class="cell"><b id="sv-g">0</b><span>γ</span></div>
+      <div class="cell"><b id="sv-e">0</b><span>η</span></div>
+      <div class="cell"><b id="sv-c">0</b><span>C = γ+η</span></div>
+      <div class="cell"><b id="sv-st">neutral</b><span>verdict</span></div>
+    </div>
+    <p id="note" class="ok">Conserved.</p>
+  </div>
+  <h3>Classification</h3>
+  <p>Any state reduces to one of three. A state that does not reduce is not a state.</p>
+  <div class="eg">
+    <label for="st">agent state</label>
+    <input type="number" id="st" value="0" step="1">
+    <p class="readout" id="cls">0 → <span class="ok">Neutral</span></p>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>Why it matters</h2>
+  <div class="card"><h3>The gauge principle</h3>
+    <p>γ and η are each only defined up to a shift. C is the part that survives the shift.
+    That is why a cell's internal representation can change without anything downstream
+    noticing — the interface is the invariant, exactly as in electromagnetism.</p></div>
+  <div class="card"><h3>Structural isomorphism to Gauss's law</h3>
+    <p>Flux in, divergence out, a conserved residue. The map is exact enough to be useful
+    and loose enough to be dangerous, which is the standing criticism —
+    <a href="../conservation-law/">the conservation law page</a> is where that gets taken
+    seriously.</p></div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="cols">
+    <div class="col"><h4>Concepts</h4><a href="../">All</a><a href="./">Conservation</a>
+      <a href="../bottle-protocol/">Bottle protocol</a><a href="../agent-lifecycle/">Lifecycle</a></div>
+    <div class="col"><h4>Next</h4><a href="../conservation-law/">The deep math →</a>
+      <a href="../../build/">Build your first agent →</a></div>
+    <div class="col"><h4>Source</h4><a href="https://github.com/SuperInstance">GitHub org →</a></div>
+  </div>
+  <div class="honest">The calculator above is the spec's arithmetic, in this page, with no
+  network calls. It is not a simulation of a running kernel — the kernel is in the repos.</div>
+</div></footer>
+<script>
+const g=document.getElementById('g'), e=document.getElementById('e');
+const sg=document.getElementById('sv-g'), se=document.getElementById('sv-e'),
+      sc=document.getElementById('sv-c'), st=document.getElementById('sv-st'),
+      note=document.getElementById('note');
+const NAME={'-1':'negative','0':'neutral','1':'positive'};
+function render(){
+  const G=+g.value, E=+e.value, C=G+E;
+  sg.textContent=G; se.textContent=E; sc.textContent=C;
+  const bad = C < -1 || C > 1;          // a ternary sum outside the representable range
+  st.textContent = bad ? 'violation' : NAME[C];
+  st.style.color = bad ? 'var(--coral)' : 'var(--accent)';
+  note.textContent = bad
+    ? 'γ+η = '+C+' is outside {-1,0,+1}. The cell cannot hold it — this is the refusal.'
+    : 'Conserved. C = '+C+' ('+NAME[C]+').';
+  note.className = bad ? 'viol' : 'ok';
+}
+g.addEventListener('input',render); e.addEventListener('input',render);
+document.getElementById('violate').onclick=()=>{g.value=1;e.value=1;render();};
+document.getElementById('reset').onclick=()=>{g.value=0;e.value=0;render();};
+const stIn=document.getElementById('st'), cls=document.getElementById('cls');
+function classify(){
+  const v=+stIn.value;
+  if([-1,0,1].includes(v)){
+    const n={'-1':'Negative','0':'Neutral','1':'Positive'}[v];
+    cls.innerHTML = v+' → <span class="ok">'+n+'</span>';
+  } else {
+    cls.innerHTML = v+' → <span class="viol">not a ternary state</span>';
+  }
+}
+stIn.addEventListener('input',classify);
+render(); classify();
+</script>
+</body></html>
