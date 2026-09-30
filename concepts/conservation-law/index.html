@@ -1,0 +1,62 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Conservation Law — SuperInstance</title>
+<meta name="description" content="What γ + η = C is isomorphic to in Z₃, what the analogy buys, and where it stops working."/>
+<link rel="stylesheet" href="../../assets/site.css"/>
+</head><body>
+<nav><div class="wrap"><a class="brand" href="../../index.html">SUPERINSTANCE</a>
+<a class="nl" href="../index.html">Concepts</a><span class="sp"></span>
+<a class="cta" href="https://github.com/SuperInstance">GitHub →</a></div></nav>
+<header class="hero"><div class="wrap"><div class="kick">Concept 5 of 6 · the deep math</div>
+<h1>The isomorphism to <em>Z₃</em>, and its limits</h1>
+<p class="lede">The most-cited idea in the fleet, stated carefully — including the part
+where the analogy runs out.</p></div></header>
+<section><div class="wrap">
+<h2>Gauss's law, briefly</h2>
+<p>Electric flux through a closed surface equals the enclosed charge. The tool that makes it
+work is <em>divergence</em>: a local quantity whose integral over a region is the flux
+through its boundary, independent of the surface chosen.</p>
+<h2>What maps to what</h2>
+<table>
+<tr><th>Electromagnetism</th><th>Substrate</th><th>Notes</th></tr>
+<tr><td>flux</td><td>a bottle crossing a cell boundary</td><td>directed, countable</td></tr>
+<tr><td>divergence</td><td>net γ+η at a cell</td><td>local, summable</td></tr>
+<tr><td>enclosed charge</td><td>C, the residue</td><td>the invariant</td></tr>
+<tr><td>gauge freedom</td><td>γ defined up to a shift</td><td>the exact part</td></tr>
+<tr><td>field</td><td>the relationship graph</td><td>loosest part</td></tr>
+</table>
+<h2>Where it stops</h2>
+<div class="card"><h3>The load-bearing caution</h3>
+<p>Z₃ is <em>abelian</em>. Agent interaction is not. The order of two bottles into a cell
+generally matters, and Z₃ addition does not. <strong>Any argument that depends on the
+substrate being Z₃ is an argument about a commutative system the substrate is not.</strong>
+The conservation check itself is fine — it is a single local sum — but "therefore the whole
+system is a Z₃ gauge field" does not follow.</p></div>
+<div class="card"><h3>What it does buy</h3>
+<p>An invariant you can check in O(1) per interaction, with no global state. That is worth
+having on its own terms, and it is what the kernel actually implements. Everything beyond
+the local sum is interpretation, and this page marks where interpretation starts.</p></div>
+</div></section>
+<section class="alt"><div class="wrap">
+<h2>Invariant checker</h2>
+<p>Give a cell three interactions. The check is local; the simulation is not.</p>
+<div class="eg"><div id="rows"></div>
+<p class="readout" id="verdict">…</p></div>
+</div></section>
+<footer><div class="wrap"><div class="honest">Built to SITE-MAP.md §7. The refusals in the
+isomorphism section are the point of the page, not a caveat bolted on.</div></div></footer>
+<script>
+const rows=document.getElementById('rows'), verdict=document.getElementById('verdict');
+const cases=[[0,1],[1,1],[-1,-1],[0,-1],[1,-1]];
+let html='';
+cases.forEach(([g,e],i)=>{ const C=g+e; const bad=C<-1||C>1;
+  html+=`<div class="tern"><div class="cell"><b>${g}</b><span>γ</span></div>
+  <div class="cell"><b>${e}</b><span>η</span></div>
+  <div class="cell"><b class="${bad?'':''}" style="color:${bad?'var(--coral)':'var(--accent)'}">${C}</b><span>C</span></div>
+  <div class="cell"><b style="font-size:1rem;color:${bad?'var(--coral)':'var(--green)'}">${bad?'refused':'conserved'}</b><span>verdict</span></div></div>`; });
+rows.innerHTML=html;
+const viol=cases.filter(([g,e])=>{const C=g+e;return C<-1||C>1;}).length;
+verdict.innerHTML = viol+' of '+cases.length+' interactions violate conservation and are refused. '+
+  '<small>That is the entire runtime rule, and it needs no appeal to electromagnetism.</small>';
+</script>
+</body></html>
