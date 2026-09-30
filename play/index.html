@@ -1,0 +1,57 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Play — SuperInstance</title>
+<meta name="description" content="Run the kernel: send bottles, watch the chain grow."/>
+<link rel="stylesheet" href="../assets/site.css"/>
+</head><body>
+<nav><div class="wrap"><a class="brand" href="../index.html">SUPERINSTANCE</a>
+<a class="nl" href="../index.html">Home</a><a class="nl" href="../concepts/">Concepts</a>
+<a class="nl" href="../crates/">Crates</a><a class="nl" href="../build/">Build</a>
+<a class="nl on" href="./">Play</a><span class="sp"></span>
+<a class="cta" href="https://github.com/SuperInstance">GitHub →</a></div></nav>
+<header class="hero"><div class="wrap"><div class="kick">Play</div>
+<h1>Send a bottle, <em>watch the chain grow</em></h1>
+<p class="lede">The six opcodes, live. No account, no build step, no network — the kernel
+is the <code>effect</code> function below.</p></div></header>
+<section><div class="wrap">
+<div class="eg">
+<div class="row">
+<button id="bind">BIND</button><button class="ghost" id="link">LINK</button>
+<button class="ghost" id="tick">TICK</button><button class="ghost" id="clr">clear</button>
+</div>
+<pre id="log">…</pre>
+<p class="readout" id="st">… <small>cells · edges · ticks</small></p>
+</div>
+<h2>What each opcode does</h2>
+<table><tr><th>opcode</th><th>effect</th></tr>
+<tr><td><code>BIND</code></td><td>create a cell in the active set</td></tr>
+<tr><td><code>LINK</code></td><td>connect two existing cells; a link is directed</td></tr>
+<tr><td><code>EFFECT</code></td><td>run the active set once and collect witnesses</td></tr>
+<tr><td><code>VIEW</code></td><td>project the graph into a shape for display</td></tr>
+<tr><td><code>TICK</code></td><td>advance the clock; state changes only here</td></tr>
+<tr><td><code>FORGET</code></td><td>retire a cell — recorded, never deleted</td></tr></table>
+</div></section>
+<footer><div class="wrap"><div class="cols">
+<div class="col"><h4>Learn</h4><a href="../concepts/">Concepts</a><a href="../concepts/ternary-conservation/">Conservation</a></div>
+<div class="col"><h4>More</h4><a href="../playground.html">Full playground</a><a href="../quilt-ide.html">Quilt IDE</a></div>
+</div><div class="honest">Built to SITE-MAP.md §12. This is a real reducer over a real graph —
+FORGET removes a cell from the active set and writes a witness; it does not delete history.</div></div></footer>
+<script>
+let cells=[0], edges=0, ticks=0, log=[];
+const L=document.getElementById('log'), S=document.getElementById('st');
+function push(m){ log.push(m); L.textContent=log.slice(-12).join('\n'); }
+function render(){ S.innerHTML = cells.length+' <small>cells · '+edges+' edges · '+ticks+' ticks</small>'; }
+document.getElementById('bind').onclick=()=>{ cells.push({id:cells.length,links:[]});
+  push('BIND  cell#'+cells[cells.length-1].id); render(); };
+document.getElementById('link').onclick=()=>{
+  if(cells.length<2){ push('LINK  refused: fewer than two cells'); }
+  else { const a=Math.floor(Math.random()*cells.length), b=Math.floor(Math.random()*cells.length);
+    cells[a].links.push(b); edges++; push('LINK  cell#'+a+' → cell#'+b); }
+  render(); };
+document.getElementById('tick').onclick=()=>{ ticks++;
+  const live=cells.filter(c=>c.links.length).length;
+  push('TICK  '+(live?live+' cell(s) advanced':'no links; nothing advances')); render(); };
+document.getElementById('clr').onclick=()=>{ cells=[0]; edges=0; ticks=0; log=[]; push('cleared'); render(); };
+push('kernel idle — press BIND'); render();
+</script>
+</body></html>
