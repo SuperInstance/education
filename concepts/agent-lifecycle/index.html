@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Agent Lifecycle — SuperInstance</title>
+<meta name="description" content="Two methods, four states, and every transition is itself a bottle."/>
+<link rel="stylesheet" href="../../assets/site.css"/>
+</head><body>
+<nav><div class="wrap"><a class="brand" href="../../index.html">SUPERINSTANCE</a>
+<a class="nl" href="../index.html">Concepts</a><span class="sp"></span>
+<a class="cta" href="https://github.com/SuperInstance">GitHub →</a></div></nav>
+<header class="hero"><div class="wrap"><div class="kick">Concept 3 of 6</div>
+<h1>Two methods, <em>four states, no exceptions</em></h1>
+<p class="lede">An agent can receive and inspect. That is the entire interface, and the
+entire discipline is in not adding a third.</p></div></header>
+<section><div class="wrap">
+<pre><code><span class="kw">trait</span> <span class="st">Agent</span> {
+    <span class="kw">fn</span> <span class="st">receive</span>(&amp;mut self, bottle: Bottle) -&gt; Bottle;
+    <span class="kw">fn</span> <span class="st">inspect</span>(&amp;self) -&gt; AgentState;
+}</code></pre>
+<p>No <code>tick</code>, no <code>step</code>, no scheduler callback. An agent that does not
+receive is unchanged; an agent's time advances only when a bottle arrives. That is what makes
+the lifecycle replayable — the same bottle sequence always produces the same states, which
+is the property the witness chain depends on.</p>
+<h2>The four states</h2>
+<table><tr><th>State</th><th>Receives?</th><th>Inspect returns</th></tr>
+<tr><td>Born</td><td>yes</td><td>initial γ</td></tr>
+<tr><td>Active</td><td>yes</td><td>current γ</td></tr>
+<tr><td>Suspended</td><td>buffers, does not apply</td><td>frozen γ</td></tr>
+<tr><td>Terminated</td><td>refuses</td><td>terminal</td></tr></table>
+</div></section>
+<section class="alt"><div class="wrap">
+<h2>Lifecycle simulator</h2>
+<p>Step an agent through its states. Every transition is a bottle, which is why the log is
+complete: there is no path that changes state without leaving a receipt.</p>
+<div class="eg"><div class="row">
+<button id="step">deliver a bottle</button>
+<button class="ghost" id="susp">suspend</button>
+<button class="ghost" id="term">terminate</button>
+<button class="ghost" id="rst">reset</button>
+</div>
+<div class="tern">
+<div class="cell"><b id="s-state">Born</b><span>state</span></div>
+<div class="cell"><b id="s-g">0</b><span>γ</span></div>
+<div class="cell"><b id="s-n">0</b><span>bottles</span></div>
+</div>
+<pre id="s-log">…</pre></div>
+</div></section>
+<footer><div class="wrap"><div class="honest">Built to SITE-MAP.md §5. The simulator is the
+state machine in this page; the kernel is in the repos.</div></div></footer>
+<script>
+let state='Born', gamma=0, n=0, log=[];
+const S=document.getElementById('s-state'), G=document.getElementById('s-g'),
+      N=document.getElementById('s-n'), L=document.getElementById('s-log');
+function push(m){ log.push(m); L.textContent=log.slice(-8).join('\n'); }
+function render(){ S.textContent=state; G.textContent=gamma; N.textContent=n; }
+document.getElementById('step').onclick=()=>{
+  if(state==='Terminated') return push('refused: terminated agents do not receive');
+  if(state==='Suspended'){ n++; return push('bottle buffered (suspended) — no state change'); }
+  const eta = [-1,0,1][n%3];
+  const C = gamma + eta;
+  if(C < -1 || C > 1){ push('bottle refused: γ+η='+C+' violates conservation'); }
+  else { gamma = C; state='Active'; n++; push('η='+eta+' → γ='+gamma); }
+  render();
+};
+document.getElementById('susp').onclick=()=>{ if(state!=='Terminated'){state='Suspended';push('suspended');render();} };
+document.getElementById('term').onclick=()=>{ state='Terminated'; push('terminated'); render(); };
+document.getElementById('rst').onclick=()=>{ state='Born'; gamma=0; n=0; log=[]; push('reset'); render(); };
+push('born, γ=0'); render();
+</script>
+</body></html>
